@@ -1,6 +1,6 @@
 package org.dev.fhhf.YuGi.resources;
 
-import org.dev.fhhf.YuGi.model.DeckArray;
+import org.dev.fhhf.YuGi.model.CardsList;
 import org.dev.fhhf.YuGi.model.MatchedDeck;
 import org.dev.fhhf.YuGi.service.MapDeckArrayService;
 import org.dev.fhhf.YuGi.service.MatchDecksService;
@@ -18,7 +18,7 @@ public class YuGiResource {
     MatchDecksService matchDecksService;
 
     @PostMapping("/top10decks")
-    public MatchedDeck cardList(@RequestBody DeckArray cards){
+    public MatchedDeck cardList(@RequestBody CardsList cards){
         return matchDecksService.compareDecks( mapDeckArray.fillMatchedDeck(cards) );
     }
 }

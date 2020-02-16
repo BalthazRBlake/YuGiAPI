@@ -5,10 +5,21 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class DeckArray {
+public class CardsList {
+
+    private String deckName;
+
     private List<Long> cards;
 
-    public DeckArray(){
+    public CardsList(){
+    }
+
+    public String getDeckName() {
+        return deckName;
+    }
+
+    public void setDeckName(String deckName) {
+        this.deckName = deckName;
     }
 
     public List<Long> getCards() {

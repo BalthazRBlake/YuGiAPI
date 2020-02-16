@@ -1,6 +1,6 @@
 package org.dev.fhhf.YuGi.service;
 
-import org.dev.fhhf.YuGi.model.DeckArray;
+import org.dev.fhhf.YuGi.model.CardsList;
 import org.dev.fhhf.YuGi.model.MatchedDeck;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ public class MapDeckArrayService {
     @Autowired
     private MatchedDeck matchedDeck;
 
-    public MatchedDeck fillMatchedDeck(DeckArray cards){
+    public MatchedDeck fillMatchedDeck(CardsList cards){
 
         Map<Long, Integer> cardsMap = new HashMap<>();
 
