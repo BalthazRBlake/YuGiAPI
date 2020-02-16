@@ -13,7 +13,7 @@ public class CardsList2MapService {
 
         Map<Long, Integer> cardsMap = new HashMap<>();
 
-        for(long card : cards.getCards()){
+        for(long card : cards.getListCards()){
             int value = 0;
             long key = card;
 
