@@ -7,9 +7,10 @@ import java.util.List;
 @Repository
 public class CardsList {
 
-    private  long id;
+    private long id;
     private String deckName;
     private List<Long> cards;
+    private int tier;
 
     public CardsList(){
 
@@ -37,5 +38,13 @@ public class CardsList {
 
     public void setCards(List<Long> cards) {
         this.cards = cards;
+    }
+
+    public int getTier() {
+        return tier;
+    }
+
+    public void setTier(int tier) {
+        this.tier = tier;
     }
 }

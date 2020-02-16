@@ -43,9 +43,11 @@ public class StandardDeckResource {
 
         String deckName = cardsStandardDeck.getDeckName();
         Map<Long, Integer> cards = CardsList2MapService.fillCardsMap(cardsStandardDeck);
+        int tier = cardsStandardDeck.getTier();
 
         standardDeck.setDeckName(deckName);
         standardDeck.setCards(cards);
+        standardDeck.setTier(tier);
 
         try{
             responseDeck = standardDeckService.findStandardDeckByDeckName(deckName);
@@ -64,11 +66,11 @@ public class StandardDeckResource {
     @PutMapping("/{deck_id}")
     public StandardDeck updateStandardDeck(@PathVariable("deck_id") long id, @RequestBody CardsList cardsStandardDeck){
 
+        String deckName = cardsStandardDeck.getDeckName();
         Map<Long, Integer> cards = CardsList2MapService.fillCardsMap(cardsStandardDeck);
-        StandardDeck standardDeck = new StandardDeck(id);
+        int tier = cardsStandardDeck.getTier();
 
-        standardDeck.setDeckName(cardsStandardDeck.getDeckName());
-        standardDeck.setCards(cards);
+        StandardDeck standardDeck = new StandardDeck(id, deckName, cards, tier);
 
         return standardDeckService.saveStandardDeck(standardDeck);
     }
