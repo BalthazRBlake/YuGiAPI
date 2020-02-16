@@ -1,47 +1,49 @@
 package org.dev.fhhf.YuGi.service;
 
-import org.dev.fhhf.YuGi.model.MatchedDeck;
-import org.dev.fhhf.YuGi.standarddecks.StandardDecks;
+import org.dev.fhhf.YuGi.model.CardsList;
+import org.dev.fhhf.YuGi.model.StandardDeck;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class MatchDecksService {
 
     @Autowired
-    private StandardDecks standardDecks;
+    CardsList2MapService cardsList2MapService;
     @Autowired
-    private MatchedDeck resultDeck;
+    private StandardDeckService standardDeckService;
 
-    public MatchedDeck compareDecks(MatchedDeck userDeck){
+    public List<StandardDeck> compareDecks(CardsList cards){
 
-        Set<Long> standardKeys =standardDecks.getDeck1Cards().keySet();
-        Map<Long, Integer> resultMapDeck = new HashMap<>();
+        Map<Long, Integer> userCards = CardsList2MapService.fillCardsMap(cards);
+        List<StandardDeck> standardDecks = standardDeckService.standardDeckList();
+        List<StandardDeck> resultDecks = new ArrayList<>();
 
-        System.out.println("Standard Deck1: " + standardDecks.getDeck1Cards());
-        System.out.println("User Deck: " + userDeck.getCards());
+        for(StandardDeck sd : standardDecks) {
 
-        for(long standardKey : standardKeys){
+            Map<Long, Integer> sdCards = sd.getCards();
+            Set<Long> standardKeys = sdCards.keySet();
+            Map<Long, Integer> resultMapDeck = new HashMap<>();
 
-            if(userDeck.getCards().containsKey(standardKey)){
-                int value = standardDecks.getDeck1Cards().get(standardKey) - userDeck.getCards().get(standardKey);
+            for (long standardKey : standardKeys) {
 
-                if(value <= 0){
-                    resultMapDeck.put(standardKey, 0);
+                if (userCards.containsKey(standardKey)) {
+                    int value = sdCards.get(standardKey) - userCards.get(standardKey);
+
+                    if (value <= 0) {
+                        resultMapDeck.put(standardKey, 0);
+                    } else {
+                        resultMapDeck.put(standardKey, value);
+                    }
                 } else {
-                    resultMapDeck.put(standardKey, value);
+                    resultMapDeck.put(standardKey, sdCards.get(standardKey));
                 }
-            }else{
-                resultMapDeck.put(standardKey, standardDecks.getDeck1Cards().get(standardKey) );
             }
+            StandardDeck cardsList = new StandardDeck(sd.getId(), sd.getDeckName(), resultMapDeck, sd.getTier());
+            resultDecks.add(cardsList);
         }
-
-        resultDeck.setCards(resultMapDeck);
-        System.out.println("Can build: " + resultDeck.getCards());
-        return resultDeck;
+        return resultDecks;
     }
 }
