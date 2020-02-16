@@ -5,8 +5,12 @@ import org.dev.fhhf.YuGi.model.StandardDeck;
 import org.dev.fhhf.YuGi.service.CardsList2MapService;
 import org.dev.fhhf.YuGi.service.StandardDeckService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.net.URI;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -32,8 +36,9 @@ public class StandardDeckResource {
 
     //@RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT})
     @PostMapping
-    public StandardDeck addStandardDeck(@RequestBody CardsList cardsStandardDeck){
+    public ResponseEntity<StandardDeck> addStandardDeck(@RequestBody CardsList cardsStandardDeck, HttpServletRequest request){
 
+        StandardDeck responseDeck = null;
         StandardDeck standardDeck = new StandardDeck();
 
         String deckName = cardsStandardDeck.getDeckName();
@@ -43,14 +48,17 @@ public class StandardDeckResource {
         standardDeck.setCards(cards);
 
         try{
-            if( standardDeckService.findStandardDeckByDeckName(deckName) != null){
-                return standardDeckService.findStandardDeckByDeckName(deckName);
-            }
+            responseDeck = standardDeckService.findStandardDeckByDeckName(deckName);
+            String sUri = request.getRequestURI() + "/" + String.valueOf(responseDeck.getId());
+            URI uri = URI.create(sUri);
+            return ResponseEntity.created(uri).body(responseDeck);
         } catch (NoSuchElementException ex){
-            return standardDeckService.saveStandardDeck(standardDeck);
-        }
 
-        return standardDeckService.saveStandardDeck(standardDeck);
+        }
+        responseDeck = standardDeckService.saveStandardDeck(standardDeck);
+        String sUri = request.getRequestURI() + "/" + String.valueOf(responseDeck.getId());
+        URI uri = URI.create(sUri);
+        return ResponseEntity.created(uri).body(responseDeck);
     }
 
     @PutMapping("/{deck_id}")
