@@ -1,5 +1,6 @@
 package org.dev.fhhf.YuGi.service;
 
+import org.dev.fhhf.YuGi.model.CardsList;
 import org.dev.fhhf.YuGi.model.StandardDeck;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,21 +11,21 @@ import java.util.*;
 public class MatchDecksService {
 
     @Autowired
+    CardsList2MapService cardsList2MapService;
+    @Autowired
     private StandardDeckService standardDeckService;
 
-    public List< Map<Long, Integer> > compareDecks(Map<Long, Integer> userCards){
+    public List<StandardDeck> compareDecks(CardsList cards){
 
+        Map<Long, Integer> userCards = CardsList2MapService.fillCardsMap(cards);
         List<StandardDeck> standardDecks = standardDeckService.standardDeckList();
-        List< Map<Long, Integer> > top10Decks = new ArrayList<>();
+        List<StandardDeck> resultDecks = new ArrayList<>();
 
         for(StandardDeck sd : standardDecks) {
 
             Map<Long, Integer> sdCards = sd.getCards();
             Set<Long> standardKeys = sdCards.keySet();
             Map<Long, Integer> resultMapDeck = new HashMap<>();
-
-            //System.out.println("Standard Deck1: " + standardDecks.getDeck1Cards());
-            //System.out.println("User Deck: " + userCards.getCards());
 
             for (long standardKey : standardKeys) {
 
@@ -40,11 +41,9 @@ public class MatchDecksService {
                     resultMapDeck.put(standardKey, sdCards.get(standardKey));
                 }
             }
-            top10Decks.add(resultMapDeck);
-            System.out.println("Can build: " + resultMapDeck);
+            StandardDeck cardsList = new StandardDeck(sd.getId(), sd.getDeckName(), resultMapDeck, sd.getTier());
+            resultDecks.add(cardsList);
         }
-        //resultDeck.setCards(resultMapDeck);
-        //System.out.println("Can build: " + resultDeck.getCards());
-        return top10Decks;
+        return resultDecks;
     }
 }

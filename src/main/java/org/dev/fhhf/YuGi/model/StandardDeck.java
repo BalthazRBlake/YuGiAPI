@@ -2,11 +2,13 @@ package org.dev.fhhf.YuGi.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
 import java.util.Map;
 
 @Entity
 @Table(name = "standard_deck")
-public class StandardDeck {
+public class StandardDeck implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,10 +35,10 @@ public class StandardDeck {
         this.id = id;
     }
 
-    public StandardDeck(long id, @NotEmpty String deckName, @NotEmpty Map<Long, Integer> cards) {
-        this.id = id;
+    public StandardDeck(@NotEmpty String deckName, @NotEmpty Map<Long, Integer> cards, int tier) {
         this.deckName = deckName;
         this.cards = cards;
+        this.tier = tier;
     }
 
     public StandardDeck(long id, @NotEmpty String deckName, @NotEmpty Map<Long, Integer> cards, int tier) {

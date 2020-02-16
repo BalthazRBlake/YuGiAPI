@@ -2,17 +2,14 @@ package org.dev.fhhf.YuGi.model;
 
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public class CardsList {
 
     private long id;
     private String deckName;
-    private List<Long> listCards;
-    private Map<Long, Integer> cards;
+    private List<Long> cards;
     private int tier;
 
     public CardsList(){
@@ -35,19 +32,11 @@ public class CardsList {
         this.deckName = deckName;
     }
 
-    public List<Long> getListCards() {
-        return listCards;
-    }
-
-    public void setListCards(List<Long> cards) {
-        this.listCards = cards;
-    }
-
-    public Map<Long, Integer> getCards() {
+    public List<Long> getCards() {
         return cards;
     }
 
-    public void setCards(Map<Long, Integer> cards) {
+    public void setCards(List<Long> cards) {
         this.cards = cards;
     }
 
@@ -58,4 +47,5 @@ public class CardsList {
     public void setTier(int tier) {
         this.tier = tier;
     }
+
 }
