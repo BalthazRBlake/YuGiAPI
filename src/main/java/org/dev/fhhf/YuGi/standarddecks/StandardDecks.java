@@ -1,4 +1,4 @@
-package org.dev.fhhf.YuGi.standarddecks;
+/*package org.dev.fhhf.YuGi.standarddecks;
 
 import org.springframework.stereotype.Repository;
 
@@ -8,7 +8,6 @@ import java.util.Map;
 @Repository
 public class StandardDecks {
 
-    //private int[] deck1 = {1, 3, 4, 50, 40, 10, 20, 30, 30};
     private Map<Long, Integer> deck1Cards = new HashMap<>();
 
     public StandardDecks(){
@@ -32,7 +31,7 @@ public class StandardDecks {
     public void setDeck1(int[] deck1) {
         this.deck1 = deck1;
     }*/
-
+/*
     public Map<Long, Integer> getDeck1Cards() {
         return deck1Cards;
     }
@@ -40,4 +39,4 @@ public class StandardDecks {
     public void setDeck1Cards(Map<Long, Integer> deck1Cards) {
         this.deck1Cards = deck1Cards;
     }
-}
+}*/

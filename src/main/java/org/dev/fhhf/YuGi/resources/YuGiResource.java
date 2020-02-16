@@ -1,24 +1,32 @@
 package org.dev.fhhf.YuGi.resources;
 
 import org.dev.fhhf.YuGi.model.CardsList;
-import org.dev.fhhf.YuGi.model.MatchedDeck;
-import org.dev.fhhf.YuGi.service.MapDeckArrayService;
-import org.dev.fhhf.YuGi.service.MatchDecksService;
+//import org.dev.fhhf.YuGi.model.MatchedDeck;
+import org.dev.fhhf.YuGi.service.CardsList2MapService;
+//import org.dev.fhhf.YuGi.service.MatchDecksService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.Map;
+
 @RestController
 public class YuGiResource {
 
     @Autowired
-    MapDeckArrayService mapDeckArray;
-    @Autowired
-    MatchDecksService matchDecksService;
+    CardsList2MapService cardsList2MapService;
+    //@Autowired
+    //MatchDecksService matchDecksService;
 
     @PostMapping("/top10decks")
-    public MatchedDeck cardList(@RequestBody CardsList cards){
-        return matchDecksService.compareDecks( mapDeckArray.fillMatchedDeck(cards) );
+    public Map<Long, Integer> cardList(@RequestBody CardsList cards){
+
+        System.out.println(cards.getDeckName());
+        System.out.println(cards.getCards());
+
+        return cardsList2MapService.fillCardsMap(cards);
+        //return matchDecksService.compareDecks( mapDeckArray.fillMatchedDeck(cards) );
     }
 }

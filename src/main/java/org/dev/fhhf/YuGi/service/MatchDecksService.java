@@ -1,6 +1,6 @@
-package org.dev.fhhf.YuGi.service;
+/*package org.dev.fhhf.YuGi.service;
 
-import org.dev.fhhf.YuGi.model.MatchedDeck;
+//import org.dev.fhhf.YuGi.model.MatchedDeck;
 import org.dev.fhhf.YuGi.standarddecks.StandardDecks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +14,8 @@ public class MatchDecksService {
 
     @Autowired
     private StandardDecks standardDecks;
-    @Autowired
-    private MatchedDeck resultDeck;
+    //@Autowired
+    //private MatchedDeck resultDeck;
 
     public MatchedDeck compareDecks(MatchedDeck userDeck){
 
@@ -45,3 +45,4 @@ public class MatchDecksService {
         return resultDeck;
     }
 }
+*/

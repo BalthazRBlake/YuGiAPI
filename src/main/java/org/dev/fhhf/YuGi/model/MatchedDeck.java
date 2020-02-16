@@ -1,4 +1,4 @@
-package org.dev.fhhf.YuGi.model;
+/*package org.dev.fhhf.YuGi.model;
 
 import org.springframework.stereotype.Repository;
 
@@ -17,3 +17,4 @@ public class MatchedDeck {
         this.cards = cards;
     }
 }
+*/
