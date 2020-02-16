@@ -5,7 +5,6 @@ import org.dev.fhhf.YuGi.model.StandardDeck;
 import org.dev.fhhf.YuGi.service.CardsList2MapService;
 import org.dev.fhhf.YuGi.service.StandardDeckService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +33,6 @@ public class StandardDeckResource {
         return standardDeckService.findStandardDeckById(id);
     }
 
-    //@RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT})
     @PostMapping
     public ResponseEntity<StandardDeck> addStandardDeck(@RequestBody CardsList cardsStandardDeck, HttpServletRequest request){
 

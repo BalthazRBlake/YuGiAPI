@@ -1,7 +1,5 @@
 package org.dev.fhhf.YuGi.model;
 
-import org.springframework.stereotype.Repository;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.Map;
