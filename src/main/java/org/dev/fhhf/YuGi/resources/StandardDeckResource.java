@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/standardDecks")
@@ -24,8 +25,8 @@ public class StandardDeckResource {
         return  standardDeckService.standardDeckList();
     }
 
-    @GetMapping("/{card_id}")
-    public StandardDeck getStandardDeckById(@PathVariable("card_id") long id){
+    @GetMapping("/{deck_id}")
+    public StandardDeck getStandardDeckById(@PathVariable("deck_id") long id){
         return standardDeckService.findStandardDeckById(id);
     }
 
@@ -41,16 +42,31 @@ public class StandardDeckResource {
         standardDeck.setDeckName(deckName);
         standardDeck.setCards(cards);
 
-        if( standardDeckService.findStandardDeckByDeckName(deckName) != null){
-            return standardDeckService.findStandardDeckByDeckName(deckName);
+        try{
+            if( standardDeckService.findStandardDeckByDeckName(deckName) != null){
+                return standardDeckService.findStandardDeckByDeckName(deckName);
+            }
+        } catch (NoSuchElementException ex){
+            return standardDeckService.saveStandardDeck(standardDeck);
         }
 
         return standardDeckService.saveStandardDeck(standardDeck);
     }
 
-        
-    @DeleteMapping("/{card_id}")
-    public void deleteStandardDeck(@PathVariable("card_id") long id){
+    @PutMapping("/{deck_id}")
+    public StandardDeck updateStandardDeck(@PathVariable("deck_id") long id, @RequestBody CardsList cardsStandardDeck){
+
+        Map<Long, Integer> cards = CardsList2MapService.fillCardsMap(cardsStandardDeck);
+        StandardDeck standardDeck = new StandardDeck(id);
+
+        standardDeck.setDeckName(cardsStandardDeck.getDeckName());
+        standardDeck.setCards(cards);
+
+        return standardDeckService.saveStandardDeck(standardDeck);
+    }
+
+    @DeleteMapping("/{deck_id}")
+    public void deleteStandardDeck(@PathVariable("deck_id") long id){
         StandardDeck standardDeck = new StandardDeck(id);
         standardDeckService.deleteStandardDeck(standardDeck);
     }
