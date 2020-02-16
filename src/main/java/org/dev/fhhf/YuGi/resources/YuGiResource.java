@@ -23,10 +23,8 @@ public class YuGiResource {
     @PostMapping("/top10decks")
     public Map<Long, Integer> cardList(@RequestBody CardsList cards){
 
-        System.out.println(cards.getDeckName());
-        System.out.println(cards.getCards());
+        Map<Long, Integer> userCards = cardsList2MapService.fillCardsMap(cards);
 
-        return cardsList2MapService.fillCardsMap(cards);
-        //return matchDecksService.compareDecks( mapDeckArray.fillMatchedDeck(cards) );
+        return userCards;
     }
 }
