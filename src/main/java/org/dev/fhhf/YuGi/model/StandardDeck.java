@@ -35,6 +35,10 @@ public class StandardDeck implements Serializable {
         this.id = id;
     }
 
+    public StandardDeck(@NotEmpty String deckName) {
+        this.deckName = deckName;
+    }
+
     public StandardDeck(@NotEmpty String deckName, @NotEmpty Map<Long, Integer> cards, int tier) {
         this.deckName = deckName;
         this.cards = cards;

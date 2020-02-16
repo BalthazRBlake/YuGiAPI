@@ -65,12 +65,22 @@ public class StandardDeckResource {
     public StandardDeck updateStandardDeck(@PathVariable("deck_id") long id, @RequestBody CardsList cardsStandardDeck){
 
         String deckName = cardsStandardDeck.getDeckName();
-        Map<Long, Integer> cards = CardsList2MapService.fillCardsMap(cardsStandardDeck);
-        int tier = cardsStandardDeck.getTier();
 
-        StandardDeck standardDeck = new StandardDeck(id, deckName, cards, tier);
+        try{
+            StandardDeck optionalDeck = standardDeckService.findStandardDeckByDeckName(deckName);
+            if(optionalDeck.getId() == id){
 
-        return standardDeckService.saveStandardDeck(standardDeck);
+                Map<Long, Integer> cards = CardsList2MapService.fillCardsMap(cardsStandardDeck);
+                int tier = cardsStandardDeck.getTier();
+
+                StandardDeck standardDeck = new StandardDeck(id, deckName, cards, tier);
+
+                return standardDeckService.saveStandardDeck(standardDeck);
+            }
+        } catch (NoSuchElementException ex){
+
+        }
+        return new StandardDeck("Deck no Existe o (Id / deckName) incorrecto");
     }
 
     @DeleteMapping("/{deck_id}")
