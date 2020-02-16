@@ -12,5 +12,5 @@ public interface StandardDeckService {
 
     public StandardDeck saveStandardDeck(StandardDeck standardDeck);
 
-    public void deleteStandardDeck(long id);
+    public void deleteStandardDeck(StandardDeck standardDeck);
 }
