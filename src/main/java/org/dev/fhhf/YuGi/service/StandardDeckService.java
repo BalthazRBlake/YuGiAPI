@@ -10,6 +10,8 @@ public interface StandardDeckService {
 
     public StandardDeck findStandardDeckById(long id);
 
+    public StandardDeck findStandardDeckByDeckName(String deckName);
+
     public StandardDeck saveStandardDeck(StandardDeck standardDeck);
 
     public void deleteStandardDeck(StandardDeck standardDeck);

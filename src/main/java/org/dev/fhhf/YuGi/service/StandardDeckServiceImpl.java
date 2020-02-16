@@ -24,6 +24,11 @@ public class StandardDeckServiceImpl implements StandardDeckService{
     }
 
     @Override
+    public StandardDeck findStandardDeckByDeckName(String deckName) {
+        return standardDeckRepo.findByDeckName(deckName).get();
+    }
+
+    @Override
     public StandardDeck saveStandardDeck(StandardDeck standardDeck) {
         return standardDeckRepo.save(standardDeck);
     }

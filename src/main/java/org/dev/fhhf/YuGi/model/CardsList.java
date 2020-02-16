@@ -7,12 +7,20 @@ import java.util.List;
 @Repository
 public class CardsList {
 
+    private  long id;
     private String deckName;
-
     private List<Long> cards;
 
     public CardsList(){
 
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getDeckName() {

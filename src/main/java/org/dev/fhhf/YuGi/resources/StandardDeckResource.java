@@ -29,20 +29,29 @@ public class StandardDeckResource {
         return standardDeckService.findStandardDeckById(id);
     }
 
+    //@RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT})
     @PostMapping
     public StandardDeck addStandardDeck(@RequestBody CardsList cardsStandardDeck){
+
         StandardDeck standardDeck = new StandardDeck();
 
-        /*System.out.println("JSON Cards");
-        System.out.println(cardsStandardDeck.getDeckName());
-        System.out.println(cardsStandardDeck.getCards());*/
         String deckName = cardsStandardDeck.getDeckName();
         Map<Long, Integer> cards = CardsList2MapService.fillCardsMap(cardsStandardDeck);
 
         standardDeck.setDeckName(deckName);
         standardDeck.setCards(cards);
-        /*System.out.println("Standard to save");
-        System.out.println(standardDeck);*/
+
+        if( standardDeckService.findStandardDeckByDeckName(deckName) != null){
+            return standardDeckService.findStandardDeckByDeckName(deckName);
+        }
+
         return standardDeckService.saveStandardDeck(standardDeck);
+    }
+
+        
+    @DeleteMapping("/{card_id}")
+    public void deleteStandardDeck(@PathVariable("card_id") long id){
+        StandardDeck standardDeck = new StandardDeck(id);
+        standardDeckService.deleteStandardDeck(standardDeck);
     }
 }

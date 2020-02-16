@@ -31,6 +31,10 @@ public class StandardDeck {
     public StandardDeck() {
     }
 
+    public StandardDeck(long id) {
+        this.id = id;
+    }
+
     public StandardDeck(long id, @NotEmpty String deckName, @NotEmpty Map<Long, Integer> cards) {
         this.id = id;
         this.deckName = deckName;
