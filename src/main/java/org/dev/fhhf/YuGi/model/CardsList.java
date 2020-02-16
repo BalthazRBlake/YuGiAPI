@@ -12,6 +12,7 @@ public class CardsList {
     private List<Long> cards;
 
     public CardsList(){
+
     }
 
     public String getDeckName() {

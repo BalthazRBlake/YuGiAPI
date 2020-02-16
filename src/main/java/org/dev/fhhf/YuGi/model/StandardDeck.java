@@ -1,5 +1,7 @@
 package org.dev.fhhf.YuGi.model;
 
+import org.springframework.stereotype.Repository;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.Map;
@@ -10,9 +12,10 @@ public class StandardDeck {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false, nullable = false)
     private long id;
 
-    @Column(name = "deck_name")
+    @Column(name = "deck_name", unique = true)
     @NotEmpty
     private String deckName;
 
