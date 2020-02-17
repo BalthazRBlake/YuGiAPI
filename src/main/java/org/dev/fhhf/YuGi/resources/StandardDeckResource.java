@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/standardDecks")
 public class StandardDeckResource {
 
