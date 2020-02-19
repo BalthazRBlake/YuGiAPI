@@ -48,6 +48,7 @@ public class MatchDecksService {
             StandardDeck cardsList = new StandardDeck(sd.getId(), sd.getDeckName(), resultMapDeck, sd.getTier(), sizeTop);
             resultDecks.add(cardsList);
         }
+        Collections.sort(resultDecks, new SortByTopSize());
         return resultDecks;
     }
 }
