@@ -28,7 +28,11 @@ public class StandardDeck implements Serializable {
 
     private int tier;
 
+    @Column(name="size")
+    private int size;
+
     public StandardDeck() {
+        size = 0;
     }
 
     public StandardDeck(long id) {
@@ -39,17 +43,19 @@ public class StandardDeck implements Serializable {
         this.deckName = deckName;
     }
 
-    public StandardDeck(@NotEmpty String deckName, @NotEmpty Map<Long, Integer> cards, int tier) {
+    public StandardDeck(@NotEmpty String deckName, @NotEmpty Map<Long, Integer> cards, int tier, int size) {
         this.deckName = deckName;
         this.cards = cards;
         this.tier = tier;
+        this.size = size;
     }
 
-    public StandardDeck(long id, @NotEmpty String deckName, @NotEmpty Map<Long, Integer> cards, int tier) {
+    public StandardDeck(long id, @NotEmpty String deckName, @NotEmpty Map<Long, Integer> cards, int tier, int size) {
         this.id = id;
         this.deckName = deckName;
         this.cards = cards;
         this.tier = tier;
+        this.size = size;
     }
 
     public long getId() {
@@ -84,6 +90,14 @@ public class StandardDeck implements Serializable {
         this.tier = tier;
     }
 
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
     @Override
     public String toString() {
         return "StandardDeck{" +
@@ -91,6 +105,7 @@ public class StandardDeck implements Serializable {
                 ", deckName='" + deckName + '\'' +
                 ", cards=" + cards +
                 ", tier=" + tier +
+                ", size=" + size +
                 '}';
     }
 }
