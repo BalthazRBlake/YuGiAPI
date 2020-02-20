@@ -41,12 +41,14 @@ public class StandardDeckResource {
         StandardDeck standardDeck = new StandardDeck();
 
         String deckName = cardsStandardDeck.getDeckName();
-        Map<Long, Integer> cards = CardsList2MapService.fillCardsMap(cardsStandardDeck);
         int tier = cardsStandardDeck.getTier();
-
+        int size = cardsStandardDeck.getCards().size();
         standardDeck.setDeckName(deckName);
-        standardDeck.setCards(cards);
         standardDeck.setTier(tier);
+        standardDeck.setSize(size);
+
+        Map<Long, Integer> cards = CardsList2MapService.fillCardsMap(cardsStandardDeck);
+        standardDeck.setCards(cards);
 
         try{
             responseDeck = standardDeckService.findStandardDeckByDeckName(deckName);
@@ -73,8 +75,9 @@ public class StandardDeckResource {
 
                 Map<Long, Integer> cards = CardsList2MapService.fillCardsMap(cardsStandardDeck);
                 int tier = cardsStandardDeck.getTier();
+                int size = cardsStandardDeck.getCards().size();
 
-                StandardDeck standardDeck = new StandardDeck(id, deckName, cards, tier);
+                StandardDeck standardDeck = new StandardDeck(id, deckName, cards, tier, size);
 
                 return standardDeckService.saveStandardDeck(standardDeck);
             }

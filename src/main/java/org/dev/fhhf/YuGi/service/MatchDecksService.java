@@ -21,8 +21,9 @@ public class MatchDecksService {
         List<StandardDeck> standardDecks = standardDeckService.standardDeckList();
         List<StandardDeck> resultDecks = new ArrayList<>();
 
-        for(StandardDeck sd : standardDecks) {
 
+        for(StandardDeck sd : standardDecks) {
+            int sizeTop = 0;
             Map<Long, Integer> sdCards = sd.getCards();
             Set<Long> standardKeys = sdCards.keySet();
             Map<Long, Integer> resultMapDeck = new HashMap<>();
@@ -36,14 +37,18 @@ public class MatchDecksService {
                         resultMapDeck.put(standardKey, 0);
                     } else {
                         resultMapDeck.put(standardKey, value);
+                        sizeTop += value;
                     }
                 } else {
                     resultMapDeck.put(standardKey, sdCards.get(standardKey));
+                    sizeTop += sdCards.get(standardKey);
                 }
             }
-            StandardDeck cardsList = new StandardDeck(sd.getId(), sd.getDeckName(), resultMapDeck, sd.getTier());
+            sizeTop = sd.getSize() - sizeTop;
+            StandardDeck cardsList = new StandardDeck(sd.getId(), sd.getDeckName(), resultMapDeck, sd.getTier(), sizeTop);
             resultDecks.add(cardsList);
         }
+        Collections.sort(resultDecks, new SortByTopSize());
         return resultDecks;
     }
 }
