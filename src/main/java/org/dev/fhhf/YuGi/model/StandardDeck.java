@@ -28,8 +28,8 @@ public class StandardDeck implements Serializable {
 
     private int tier;
 
-    @Column(name="size")
-    private int size;
+    @Column(name="size", nullable = false)
+    private Integer size;
 
     public StandardDeck() {
         size = 0;
@@ -91,12 +91,13 @@ public class StandardDeck implements Serializable {
     }
 
     public int getSize() {
+        if(size == null) return 0;
         return size;
     }
 
-    public void setSize(int size) {
-        this.size = size;
-    }
+    public void setSize(Integer size) {
+        if(size == null) size = 0;
+        this.size = size; }
 
     @Override
     public String toString() {
