@@ -13,7 +13,7 @@ public class StandardDeck implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
-    private long id;
+    private Long id;
 
     @Column(name = "deck_name", unique = true)
     @NotEmpty
@@ -26,7 +26,7 @@ public class StandardDeck implements Serializable {
     @CollectionTable(name="cards", joinColumns=@JoinColumn(name="units_id"))
     private Map<Long, Integer> cards;
 
-    private int tier;
+    private Integer tier;
 
     @Column(name="size")
     private Integer size;

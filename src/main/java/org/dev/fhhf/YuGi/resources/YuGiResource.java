@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,6 +19,11 @@ public class YuGiResource {
 
     @PostMapping("/top10decks")
     public List<StandardDeck> cardList(@RequestBody CardsList cards){
-        return matchDecksService.compareDecks(cards);
+
+        List<StandardDeck> allResults = matchDecksService.compareDecks(cards);
+
+        int n = allResults.size() > 9 ? 9 : allResults.size();
+
+        return allResults.subList(0, n);
     }
 }
