@@ -21,8 +21,6 @@ public class StandardDeckResource {
 
     @Autowired
     private StandardDeckService standardDeckService;
-    @Autowired
-    CardsList2MapService cardsList2MapService;
 
     @GetMapping
     public List<StandardDeck> getAllStandardDecks(){
