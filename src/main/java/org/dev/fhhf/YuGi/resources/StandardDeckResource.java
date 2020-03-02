@@ -22,8 +22,6 @@ public class StandardDeckResource {
 
     @Autowired
     private StandardDeckService standardDeckService;
-    @Autowired
-    CardsList2MapService cardsList2MapService;
 
     @GetMapping
     @ApiOperation(value = "returns all available Standard Decks",
