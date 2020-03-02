@@ -43,6 +43,12 @@ public class StandardDeckResource {
         String deckName = cardsStandardDeck.getDeckName();
         int tier = cardsStandardDeck.getTier();
         int size = cardsStandardDeck.getCards().size();
+
+        if(size < 20 && size > 30){
+            responseDeck.setDeckName("El tamaño debe ser entre 20 y 30");
+            return ResponseEntity.badRequest().body(responseDeck);
+        }
+
         standardDeck.setDeckName(deckName);
         standardDeck.setTier(tier);
         standardDeck.setSize(size);
