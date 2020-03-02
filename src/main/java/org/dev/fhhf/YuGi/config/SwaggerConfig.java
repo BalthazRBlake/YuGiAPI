@@ -19,18 +19,18 @@ public class SwaggerConfig {
     public Docket swaggerConfiguration(){
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .paths(PathSelectors.regex("/api.*"))//.ant("/emp/*"))
-                .apis(RequestHandlerSelectors.basePackage("org.dev.fhhf.testtask"))
+                .paths(PathSelectors.regex("/api.*"))
+                .apis(RequestHandlerSelectors.basePackage("org.dev.fhhf.YuGi"))
                 .build()
                 .apiInfo(apiDetails());
     }
 
     private ApiInfo apiDetails(){
         return new ApiInfo(
-                "Employees API",
-                "TestTask Project",
+                "YuGi API",
+                "Get to 10 Matched Standard Decks",
                 "1.0",
-                "EmployeeResource",
+                "https://github.com/camyoh",
                 new springfox.documentation.service.Contact(
                         "Fabian Hernández",
                         "https://github.com/BalthazRBlake",
