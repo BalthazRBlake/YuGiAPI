@@ -1,5 +1,8 @@
 package org.dev.fhhf.YuGi.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
@@ -7,6 +10,7 @@ import java.util.Map;
 
 @Entity
 @Table(name = "standard_deck")
+@ApiModel(description = "Standard Deck response Object")
 public class StandardDeck implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -17,6 +21,7 @@ public class StandardDeck implements Serializable {
 
     @Column(name = "deck_name", unique = true)
     @NotEmpty
+    @ApiModelProperty(required = true, example = "Super Deck")
     private String deckName;
 
     @NotEmpty
@@ -32,7 +37,6 @@ public class StandardDeck implements Serializable {
     private Integer size;
 
     public StandardDeck() {
-        size = 0;
     }
 
     public StandardDeck(long id) {
